@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Ponències</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="deleteItem()" color="danger"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button>  
+      <ion-button (click)="toggleReorder()"><ion-icon slot="icon-only" name="reorder-three-outline"></ion-icon></ion-button>
+      <ion-button [routerLink]="['/add-edit-item', { tab:tabIndex, item:-1 }]"><ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>       
+</ion-header>
+
+<ion-content>
+  <ion-list #myList lines="full">
+    <ion-reorder-group [disabled]="!reorder" (ionItemReorder)="moveItem($event.detail)">
+      <ion-item-sliding *ngFor="let item of tabs[tabIndex].list; let i=index" >
+        <ion-item [routerLink]="['/add-edit-item', { tab:tabIndex, item:i }]"  >
+          <ion-label class="ion-text-wrap">
+            <h2>{{item.task}}</h2>
+            <p>Durada: {{item.minuts}}  min.</p>        
+          </ion-label>
+          <ion-icon slot="end" name="ellipse" [color]="item.icon"></ion-icon>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+        <ion-item-options side="start">
+          <ion-item-option color="danger" (click)="deleteItem(i)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-reorder-group>
+  </ion-list>
+</ion-content>
+
+
+<ion-button size="large" expand="block" color="tertiary" padding>Durada Total  {{ calculHores() }}   min.</ion-button> 
+
+<ion-footer>
+
+  <ion-tab-bar #myTabs color="primary" [selectedTab]="tabs[0].label">
+  
+    <ion-tab-button tab="Home" [routerLink]="['/home', { tab:tabIndex, item:-1 }]">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Inici</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tempo" [routerLink]="['/tempo', { tab:tabIndex, item:-1 }]">
+      <ion-icon name="time"></ion-icon>
+      <ion-label>Començar</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+<!--
+  <ion-tab-bar #myTabs color="primary" [selectedTab]="tabs[0].label">
+
+    <ion-tab-button *ngFor="let tab of tabs; let i=index" (click)="setTab(i)" [tab]="tab.label" [routerLink]="['/home', { tab:tabIndex, item:-1 }]">
+      <ion-label>{{tab.label}}</ion-label>
+      <ion-icon [name]="tab.icon"></ion-icon>
+    </ion-tab-button>
+
+  </ion-tab-bar>-->
+</ion-footer>

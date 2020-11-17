@@ -1,0 +1,51 @@
+<style>
+  ion-content ion-segment {
+    margin: 5px 0;
+  }
+
+</style>
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Ponència</ion-title>
+    <ion-buttons slot="primary">
+        <ion-button (click)="delete()" color="danger"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button>  
+        <ion-button color="danger" [routerLink]="['/home']"><ion-icon slot="icon-only" name="close"></ion-icon></ion-button>
+        <ion-button color="primary" (click)="save()"><ion-icon slot="icon-only" name="checkmark"></ion-icon></ion-button>
+    </ion-buttons>       
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Títol catítol: </ion-label>
+      <ion-input [(ngModel)]="item.task"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">Anotacions: </ion-label>
+      <!--<ion-input [(ngModel)]="item.notes"></ion-input>-->
+      <ion-textarea [(ngModel)]="item.notes" autoGrow = "true" maxlength = "120" rows= "10" id="area"></ion-textarea>
+    </ion-item>
+    <!--<ion-item>
+      <ion-label position="floating">Durada (hh:mm)</ion-label>
+      <ion-datetime displayFormat="h:mm" pickerFormat="h:mm"  [(ngModel)]="item.minuts"></ion-datetime>      
+    </ion-item>-->
+
+    <ion-item>
+      <ion-label position="floating">Minuts: {{item.minuts}}</ion-label>
+      <ion-range min="1" max="200" pin color="secondary" value="1" [(ngModel)]="item.minuts">
+        <ion-icon slot="start" size="medium" name="time"></ion-icon>
+        <ion-icon slot="end" size="large" name="time"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+
+  </ion-list>
+  <ion-segment [(ngModel)]="item.icon" scrollable="true" >
+    <ion-segment-button *ngFor="let button of colores" [value]="button">
+      <ion-icon name ="ellipse" [color]="button"></ion-icon>
+    </ion-segment-button>
+   
+  </ion-segment>
+</ion-content>

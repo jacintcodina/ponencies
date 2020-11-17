@@ -1,0 +1,9 @@
+{
+  "name": "ponencies",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "54673e9b"
+}

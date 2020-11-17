@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title slot="start" class="ion-text-left">Començar ponència</ion-title>
+    <ion-button [hidden]=amagarComencar slot="end" començar (click)="comencar()" color="danger">Començar</ion-button>  
+    <ion-button [hidden]=amagarCrono slot="end" començar (click)="parar()" >      
+         <countdown [config]="config" (event)="handleEvent($event)" id="rellotge"></countdown>         
+    </ion-button>
+    <ion-button [hidden]=amagarFinalitzat slot="end" començar (click)="comencar()" color="danger">Finalitzat</ion-button>  
+    
+
+  </ion-toolbar>       
+</ion-header>
+
+
+<ion-content>
+  <ion-list #myList lines="full" >
+         
+      <ion-item-sliding *ngFor="let item of tabs[tabIndex].list; let i=index">
+        <ion-card> 
+            <ion-item id="item{{item.id}}">
+                <ion-label slot="start"  >{{item.task}}</ion-label>
+                <ion-note slot="end" [color]="item.icon">{{item.minuts}} min.</ion-note>     
+            </ion-item>       
+            
+            <ion-text class="ion-no-margin" [hidden]="posicio!=i" id="notes"><pre>{{item.notes}}</pre></ion-text>
+            <ion-progress-bar [hidden]="posicio!=i" [value]="item.percentatge" class="ion-padding" [color]="item.icon"></ion-progress-bar>
+        </ion-card>  
+        
+      </ion-item-sliding>
+    
+  </ion-list>
+
+
+
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-tab-bar #myTabs color="primary">
+
+    <ion-tab-button tab="Home" [routerLink]="['/home']">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Inici</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tempo" [routerLink]="['/tempo']">
+      <ion-icon name="time"></ion-icon>
+      <ion-label>Començar</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-footer>
