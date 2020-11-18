@@ -1,9 +1,11 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { AlertController, IonList } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ListService } from '../list.service';
 import { CountdownComponent } from 'ngx-countdown';
 import { Insomnia } from '@ionic-native/insomnia/ngx';
+import { IonContent } from '@ionic/angular';
+
 
 
 @Component({
@@ -12,9 +14,10 @@ import { Insomnia } from '@ionic-native/insomnia/ngx';
   styleUrls: ['./tempo.page.scss']
 })
 
-export class TempoPage implements OnInit, OnDestroy{
+export class TempoPage implements OnInit, OnDestroy {
   @ViewChild('countdown', { static: false }) private countdown: CountdownComponent;
-   
+  @ViewChild(IonContent, {static: true}) content: IonContent;
+    
 
   tabs: any;
   tabIndex: number;
@@ -30,6 +33,7 @@ export class TempoPage implements OnInit, OnDestroy{
   timeLeft: number = 0;
   interval;
   posicio = 0; 
+  scrollTo = null;
 
  
 
@@ -56,6 +60,9 @@ export class TempoPage implements OnInit, OnDestroy{
                       if (((llista.minuts*60)+tempsAcumulat)==this.timeLeft) {                           
                           tempsAcumulat += (llista.minuts*60);
                           this.posicio+=1;
+                          if (this.posicio > 2) {this.content.scrollToPoint(0, (80*(this.posicio-2)), 800);}
+
+                          
                           
                       };
                   };
@@ -84,20 +91,21 @@ export class TempoPage implements OnInit, OnDestroy{
           private listService: ListService,
           private alertController: AlertController,
           private insomnia: Insomnia
-          ){
-      
-    
-  }
+          ){    
+            
+          }
+     
 
+  
   ngOnInit() {
-          this.ionViewWillEnter();
+          this.ionViewWillEnter();  
           
-
          
-    }
+    }  
 
     ngOnDestroy() {
       this.ionViewWillEnter();
+      this.parar();
     }
 
 
@@ -117,7 +125,12 @@ export class TempoPage implements OnInit, OnDestroy{
       this.tabIndex = 0;
       this.reorder = false;
       this.posicio = 0; 
+      
+      
+      
     }
+
+  
 
     
 
@@ -148,17 +161,16 @@ export class TempoPage implements OnInit, OnDestroy{
             llistatasques[0].list.forEach ((llista, index)  => {
                   llistatasques[0].list[index].percentatge = 0;
               });
-             
+                         
           }
-
           
           this.insomnia.keepAwake()  // no deixar parar pantalla
             .then(
                 () => console.log(JSON.stringify('insomnia success')),
                 () => console.log(JSON.stringify('insomnia error'))
           );    
+              
     }
-    
 
     calculMinuts() {
       let suma = 0;

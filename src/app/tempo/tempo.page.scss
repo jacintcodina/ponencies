@@ -30,4 +30,22 @@
   #rellotge {
     font-size: 30px;
   }
+
+  .cartes {
+    //opacity: 0.1;
+  //  background: rgba(,,, 0.3)
+  }
   
+
+  ion-card {
+    border-top: 1px solid rgb(36, 23, 148);
+    border-bottom: 1px solid rgb(36, 23, 148);
+    border-left: 1px solid rgb(36, 23, 148);
+    border-right: 1px solid rgb(36, 23, 148);   
+   
+}
+
+ion-text {
+   margin-left: 30px ;
+   inline-size: auto;
+}

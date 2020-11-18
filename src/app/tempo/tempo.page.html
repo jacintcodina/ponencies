@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title slot="start" class="ion-text-left">Començar ponència</ion-title>
+    <ion-title slot="start" class="ion-text-left">Ponència</ion-title>
     <ion-button [hidden]=amagarComencar slot="end" començar (click)="comencar()" color="danger">Començar</ion-button>  
     <ion-button [hidden]=amagarCrono slot="end" començar (click)="parar()" >      
          <countdown [config]="config" (event)="handleEvent($event)" id="rellotge"></countdown>         
@@ -12,17 +12,17 @@
 </ion-header>
 
 
-<ion-content>
-  <ion-list #myList lines="full" >
+<ion-content >
+  <ion-list  #myList lines="full" >
          
-      <ion-item-sliding *ngFor="let item of tabs[tabIndex].list; let i=index">
-        <ion-card> 
-            <ion-item id="item{{item.id}}">
-                <ion-label slot="start"  >{{item.task}}</ion-label>
+      <ion-item-sliding *ngFor="let item of tabs[tabIndex].list;  let i=index" > 
+        <ion-card [ngStyle]="{'border-style': posicio!=i ? 'none' : 'solid' }"> 
+            <ion-item id="item{{item.id}}" >
+                <ion-label slot="start" >{{item.task}}</ion-label>
                 <ion-note slot="end" [color]="item.icon">{{item.minuts}} min.</ion-note>     
             </ion-item>       
             
-            <ion-text class="ion-no-margin" [hidden]="posicio!=i" id="notes"><pre>{{item.notes}}</pre></ion-text>
+            <ion-text style="text-align:center;" class="ion-float-start" [hidden]="posicio!=i" id="notes"><pre>{{item.notes}}</pre></ion-text>
             <ion-progress-bar [hidden]="posicio!=i" [value]="item.percentatge" class="ion-padding" [color]="item.icon"></ion-progress-bar>
         </ion-card>  
         

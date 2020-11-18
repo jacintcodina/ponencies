@@ -19,6 +19,10 @@ export class HomePage {
 
   constructor(private listService: ListService,
               private alertController: AlertController){
+          this.ngAfterViewInit();
+  }
+
+  ngAfterViewInit() {
     this.tabs = [
       {label: 'Inici', icon: 'home', list: []},
       {label: 'Tempo', icon: 'time', list: []}
@@ -28,6 +32,7 @@ export class HomePage {
     });
     this.tabIndex = 0;
     this.reorder = false;
+
   }
 
 
