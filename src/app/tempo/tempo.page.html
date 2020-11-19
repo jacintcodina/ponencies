@@ -18,8 +18,8 @@
       <ion-item-sliding *ngFor="let item of tabs[tabIndex].list;  let i=index" > 
         <ion-card [ngStyle]="{'border-style': posicio!=i ? 'none' : 'solid' }" > 
             <ion-item id="item{{item.id}}" >
-                <ion-label slot="start" style="font-size: x-large;"  >{{item.task}}</ion-label>
-                <ion-note slot="end" [color]="item.icon"  style="font-size: medium;" >{{(item.percentatge * item.minuts )| number: '1.0-1' }} / {{item.minuts}} min.</ion-note>     
+                <ion-label style="font-size: x-large;" class="titol" >{{item.task}}</ion-label>
+                <ion-note  [color]="item.icon" class="minuts">{{(item.percentatge * item.minuts )| number: '1.0-1' }} / {{item.minuts}} min.</ion-note>  
             </ion-item>       
             
             <ion-text style="font-size: large;" class="ion-float-start" [hidden]="posicio!=i" id="notes"><pre>{{item.notes}}</pre></ion-text>
