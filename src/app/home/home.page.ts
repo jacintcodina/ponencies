@@ -19,10 +19,10 @@ export class HomePage {
 
   constructor(private listService: ListService,
               private alertController: AlertController){
-          this.ngAfterViewInit();
+             this.ionViewWillEnter();
   }
 
-  ngAfterViewInit() {
+  ionViewWillEnter() {
     this.tabs = [
       {label: 'Inici', icon: 'home', list: []},
       {label: 'Tempo', icon: 'time', list: []}
